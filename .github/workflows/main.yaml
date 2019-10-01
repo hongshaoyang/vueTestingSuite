@@ -1,8 +1,7 @@
-name: Deploy Lambda Function on push
 on: push
 jobs:
   build:
-    name: Test action
+    name: Deploy Lambda Function on push
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
