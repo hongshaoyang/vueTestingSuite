@@ -9,9 +9,11 @@ export APINAME="$LAMBDA_FUNC_NAME-API"
 export OVERLAY_S3URL="s3://${BUCKET_NAME}/${LAMBDA_FUNC_NAME}/lambda-deploy.tgz"
 
 # Zip up and upload your project in the src/ folder to the AWS S3 cloud
-rm -f lambda-deploy.zip
 tar -czvf lambda-deploy-overlay.tgz ./
 aws s3 cp --acl public-read lambda-deploy-overlay.tgz "$OVERLAY_S3URL"
+
+# zip src/ folder
+rm -f lambda-deploy.zip
 cd src; zip -r ../lambda-deploy.zip *
 cd ..
 
