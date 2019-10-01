@@ -10,7 +10,6 @@ RUN apk add --no-cache --virtual .build-deps gcc musl-dev \
     && apk del .build-deps 
 
 RUN pip3 install awscli 
-
 RUN apk add zip
 
 ADD entrypoint.sh /entrypoint.sh
