@@ -1,109 +1,99 @@
 <!-- Shown Block - Test - layoutItems[1]
 Editable Block - JS Source code - layoutItems[0] -->
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      content="width=device-width,initial-scale=1,minimal-ui"
-      name="viewport"
-    />
-    <link
-      rel="shortcut icon"
-      href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/////////////////////////+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/////6+fv/W0KZ/1tCmf9bQpn//v7+///////////+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/////W0KZ/1tCmf9bQpn/W0KZ/1tCmf9bQpn//v7//////////////////Y+PjzkAAAAAAAAAAAAAAAAAAAAA/////1tCmf9bQpn//////1tCmf9bQpn/W0KZ/1tCmf9bQpn/W0GZ/0gTkv/+/v7//////wAAAAAAAAAAAAAAAP////9bQpn//////////9r/////opDE/1tCmf9bQpn/W0KZ/1tCmf9bQpn/W0KZ/1o+mv//////AAAAAAAAAAD/////Z1Ke//////8AAAAAAAAAAP////+FcrL/W0KZ/1tCmf9bQpn/W0KZ/1tCmf9bQpn//////wAAAAAAAAAAAAAAAP//////////////SwAAAAAAAAAA//////////9bQpn/W0KZ/19Hm/////////////////8AAAAAAAAAAP////v/////W0KZ//////8AAAAA/////04jlf9cRJr//////1tCmf//////W0KZ/+nn8P/////+AAAAAAAAAAD////5nYvB/1tCmf//////AAAAAP////9bQpn/W0KZ/////////////////1tCmf9fR5v//////wAAAAAAAAAAAAAAAP//////////////+wAAAADf398F//////////////94AAAAAP////v//////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP////9YO5j//////wAAAAD//////////////8oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/////W0KZ////////////8O71/1pBmf//////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAQEAC/////1tCmf9bQpn//////1tCmf9bQpn//////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////1o/mf9bQpn/W0KZ//////9bQpn/W0KZ///////////gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP////9bQpn/W0KZ/1tCmf9bQpn/W0KZ/1tCmf9bQZn//////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAL+/vwL///////////////////////////////////////////////8AAAAAwf8AAIB/AACADwAAgAMAAIABAACMAQAAzgEAAIQBAACEAQAAxmMAAP4jAAD+AwAA/gMAAPwBAAD8AQAA/AEAAA=="
-    />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/vue-material@beta/dist/vue-material.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/vue-material@beta/dist/theme/default.css"
-    />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css" />
-  </head>
-    <body>
-    <div id="app">
-        <div class="md-layout">
-          <div class="md-layout-item">
-            <h1 style="padding: 0px;">Vue Activity : Edit the source code to pass the tests</h1>
-          </div>
-        </div>
-        <md-tabs>
-          <md-tab v-for="question in questions" :key=question.name v-bind:md-label=question.name+question.status>
-            <jest-activity v-bind:layout-things=question.layoutItems v-bind:question-name=question.name  @questionhandler="toggleQuestionStatus"/>
-          </md-tab>
-        </md-tabs>
-      </div>
-    </body> 
-    <script src="https://unpkg.com/vue"></script>
-    <script src="https://unpkg.com/vue-material@beta"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-codemirror@4.0.6/dist/vue-codemirror.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.10.2/beautify.min.js"></script>
-    <script src="https://codemirror.net/addon/scroll/simplescrollbars.js"></script>
-    <script>
-    Vue.use(VueMaterial.default)
-    Vue.use(window.VueCodemirror)
-    Vue.component('jest-activity', {
-        props: ['layoutThings', 'questionName'],
-        data: function () {
-            return {
-            answer:{jsonFeedback:'',htmlFeedback:'',textFeedback:'',isComplete:false},
-            layoutItems: this.layoutThings,
-            isHidden: true,
-            submitText: "Submit",
-            isCorrectColor: "#ff5252",
-            cmOptions: {
-              mode: 'javascript',
-              lineNumbers: true
-            },
-            cmReadOnly: {
-              lineNumbers: true,
-              mode:  "javascript",
-              readOnly: true
-            },
-            cmInstructions:{
-              lineNumbers: false,
-              mode: "text",
-              readOnly: true,
-              scrollbarStyle: "simple"
-            }
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width,initial-scale=1,minimal-ui" name="viewport" />
+  <link rel="stylesheet" href="https://unpkg.com/vue-material@beta/dist/vue-material.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/vue-material@beta/dist/theme/default.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css" />
+</head>
+
+<body>
+  <div id="app">
+    <div class="md-layout">
+      <div class="md-layout-item">
+        <h1 style="padding: 0px;">Vue Activity : Edit the source code to pass the tests</h1>
+      </div>
+    </div>
+    <md-tabs>
+      <md-tab v-for="question in questions" :key=question.name v-bind:md-label=question.name+question.status>
+        <jest-activity v-bind:layout-things=question.layoutItems v-bind:question-name=question.name
+          @questionhandler="toggleQuestionStatus" />
+      </md-tab>
+    </md-tabs>
+  </div>
+</body>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/vue-material@beta"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-codemirror@4.0.6/dist/vue-codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.10.2/beautify.min.js"></script>
+<script src="https://codemirror.net/addon/scroll/simplescrollbars.js"></script>
+<script>
+  Vue.use(VueMaterial.default)
+  Vue.use(window.VueCodemirror)
+  Vue.component('jest-activity', {
+    props: ['layoutThings', 'questionName'],
+    data: function () {
+      return {
+        answer: { jsonFeedback: '', htmlFeedback: '', textFeedback: '', isComplete: false },
+        layoutItems: this.layoutThings,
+        isHidden: true,
+        submitText: "Submit",
+        isCorrectColor: "#ff5252",
+        cmOptions: {
+          mode: 'javascript',
+          lineNumbers: true
+        },
+        cmReadOnly: {
+          lineNumbers: true,
+          mode: "javascript",
+          readOnly: true
+        },
+        cmInstructions: {
+          lineNumbers: false,
+          mode: "text",
+          readOnly: true,
+          scrollbarStyle: "simple"
         }
-        },
-        methods: {
-            postContents: function () {
-            // comment: leaving the gatewayUrl empty - API will post back to itself
-            const gatewayUrl = '';
-            this.$set(this, 'submitText', 'Loading...');
-            this.$set(this, 'answer', {jsonFeedback:'',htmlFeedback:'',textFeedback:'',isComplete:false});
-            this.$set(this, 'isHidden', true);
-            fetch(gatewayUrl, {
-        method: "POST",
-        headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({userToken: "ABCDE", shown:{0:this.layoutItems[2].vModel},editable:{0:this.layoutItems[1].vModel},hidden: {0: this.layoutItems[3].vModel}})
+      }
+    },
+    methods: {
+      postContents: function () {
+        // comment: leaving the gatewayUrl empty - API will post back to itself
+        const gatewayUrl = '';
+        this.$set(this, 'submitText', 'Loading...');
+        this.$set(this, 'answer', { jsonFeedback: '', htmlFeedback: '', textFeedback: '', isComplete: false });
+        this.$set(this, 'isHidden', true);
+        fetch(gatewayUrl, {
+          method: "POST",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ userToken: "ABCDE", shown: { 0: this.layoutItems[2].vModel }, editable: { 0: this.layoutItems[1].vModel }, hidden: { 0: this.layoutItems[3].vModel } })
         }).then(response => {
-            return response.json()
+          return response.json()
         }).then(data => {
-            let temp = JSON.parse(JSON.stringify(data));
-            temp.jsonFeedback = JSON.stringify(temp.jsonFeedback,null,2);
-            this.$set(this, 'answer', temp);
-            this.$set(this, 'isHidden', false);
-            this.$set(this, 'submitText', 'Submit');
-              if (this.answer && this.answer.isComplete) {
-                this.$set(this, 'isCorrectColor', 'green');
-              } else {
-                this.$set(this, 'isCorrectColor', '#ff5252');
-              }
-            return this.$emit('questionhandler',{data, questionName:this.questionName})
-            })
-         }
-        },
-        template:  `<div class="md-layout">
+          let temp = JSON.parse(JSON.stringify(data));
+          temp.jsonFeedback = JSON.stringify(temp.jsonFeedback, null, 2);
+          this.$set(this, 'answer', temp);
+          this.$set(this, 'isHidden', false);
+          this.$set(this, 'submitText', 'Submit');
+          if (this.answer && this.answer.isComplete) {
+            this.$set(this, 'isCorrectColor', 'green');
+          } else {
+            this.$set(this, 'isCorrectColor', '#ff5252');
+          }
+          return this.$emit('questionhandler', { data, questionName: this.questionName })
+        })
+      }
+    },
+    template: `<div class="md-layout">
           <div class="md-layout-item md-size-100">
             <div class="md-layout md-gutter">
               <div class="md-layout-item md-size-50">
@@ -210,134 +200,161 @@ Editable Block - JS Source code - layoutItems[0] -->
             </div>
           </div>
         </div>`
-    })
-    new Vue({
-      el: "#app",
-      data: function () {
-            return {
-            questions:[
-                {name:"question 1", layoutItems: [
-                {vModel: js_beautify(`Edit your code to pass the tests! All the best!`)},
-                {vModel: js_beautify(`//main.js \n var app=new Vue({el:"#app",data:{user:"Chris",temp:95}});module.exports=app;`)},
-                {vModel: js_beautify(`//main.spec.js \n const app=require("./main");describe("Load app from main.js",()=>{it("has a created hook",()=>{expect(typeof app).toBe("object");});it("sets the correct default data",()=>{expect(typeof app).toBe("object");expect(2).toEqual(2);expect(app.user).toEqual("Chris");});});`)},  
-                {vModel: js_beautify(`{\n"scripts":{ "test":"jest" }\n}`)}                  
-                ], status:" 🔴"},
-                {name:"question 2", layoutItems: [
-                {vModel: js_beautify(`Edit your code to pass the tests! All the best!`)},
-                {vModel: js_beautify(`//main.js \n var app=new Vue({el:"#app",data:{user:"Chris",temp:95}});module.exports=app;`)},
-                {vModel: js_beautify(`//main.spec.js \n const app=require("./main");describe("Load app from main.js",()=>{it("has a created hook",()=>{expect(typeof app).toBe("object");});it("sets the correct default data",()=>{expect(typeof app).toBe("object");expect(2).toEqual(2);expect(app.user).toEqual("Chris");});});`)},  
-                {vModel: js_beautify(`{\n"scripts":{ "test":"jest" }\n}`)}                  
-                ], status:" 🔴"},
-                {name:"question 3", layoutItems: [
-                {vModel: js_beautify(`Edit your code to pass the tests! All the best!`)},
-                {vModel: js_beautify(`//main.js \n var app=new Vue({el:"#app",data:{user:"Chris",temp:95}});module.exports=app;`)},
-                {vModel: js_beautify(`//main.spec.js \n const app=require("./main");describe("Load app from main.js",()=>{it("has a created hook",()=>{expect(typeof app).toBe("object");});it("sets the correct default data",()=>{expect(typeof app).toBe("object");expect(2).toEqual(2);expect(app.user).toEqual("Chris");});});`)},  
-                {vModel: js_beautify(`{\n"scripts":{ "test":"jest" }\n}`)}                  
-                ], status:" 🔴"},
-                {name:"question 4", layoutItems: [
-                {vModel: js_beautify(`Edit your code to pass the tests! All the best!`)},
-                {vModel: js_beautify(`//main.js \n var app=new Vue({el:"#app",data:{user:"Chris",temp:95}});module.exports=app;`)},
-                {vModel: js_beautify(`//main.spec.js \n const app=require("./main");describe("Load app from main.js",()=>{it("has a created hook",()=>{expect(typeof app).toBe("object");});it("sets the correct default data",()=>{expect(typeof app).toBe("object");expect(2).toEqual(2);expect(app.user).toEqual("Chris");});});`)},  
-                {vModel: js_beautify(`{\n"scripts":{ "test":"jest" }\n}`)}                  
-                ], status:" 🔴"},
-                {name:"question 5", layoutItems: [
-                {vModel: js_beautify(`Edit your code to pass the tests! All the best!`)},
-                {vModel: js_beautify(`//main.js \n var app=new Vue({el:"#app",data:{user:"Chris",temp:95}});module.exports=app;`)},
-                {vModel: js_beautify(`//main.spec.js \n const app=require("./main");describe("Load app from main.js",()=>{it("has a created hook",()=>{expect(typeof app).toBe("object");});it("sets the correct default data",()=>{expect(typeof app).toBe("object");expect(2).toEqual(2);expect(app.user).toEqual("Chris");});});`)},  
-                {vModel: js_beautify(`{\n"scripts":{ "test":"jest" }\n}`)}                  
-                ], status:" 🔴"}
-                ]
-            }
-      },
-      methods: {
-        toggleQuestionStatus (response) {
-          const {data, questionName} = response
-          if (data.isComplete) {
-            this.questions.find(item => item.name === questionName).status = " ✔️";
-            
+  })
+  new Vue({
+    el: "#app",
+    data: function () {
+      return {
+        questions: [
+          {
+            name: "question 1", layoutItems: [
+              { vModel: js_beautify(`Edit your code to pass the tests! All the best!`) },
+              { vModel: js_beautify(`//main.js \n var app=new Vue({el:"#app",data:{user:"Chris",temp:95}});module.exports=app;`) },
+              { vModel: js_beautify(`//main.spec.js \n const app=require("./main");describe("Load app from main.js",()=>{it("has a created hook",()=>{expect(typeof app).toBe("object");});it("sets the correct default data",()=>{expect(typeof app).toBe("object");expect(2).toEqual(2);expect(app.user).toEqual("Chris");});});`) },
+              { vModel: js_beautify(`{\n"scripts":{ "test":"jest" }\n}`) }
+            ], status: " 🔴"
+          },
+          {
+            name: "question 2", layoutItems: [
+              { vModel: js_beautify(`Edit your code to pass the tests! All the best!`) },
+              { vModel: js_beautify(`//main.js \n var app=new Vue({el:"#app",data:{user:"Chris",temp:95}});module.exports=app;`) },
+              { vModel: js_beautify(`//main.spec.js \n const app=require("./main");describe("Load app from main.js",()=>{it("has a created hook",()=>{expect(typeof app).toBe("object");});it("sets the correct default data",()=>{expect(typeof app).toBe("object");expect(2).toEqual(2);expect(app.user).toEqual("Chris");});});`) },
+              { vModel: js_beautify(`{\n"scripts":{ "test":"jest" }\n}`) }
+            ], status: " 🔴"
+          },
+          {
+            name: "question 3", layoutItems: [
+              { vModel: js_beautify(`Edit your code to pass the tests! All the best!`) },
+              { vModel: js_beautify(`//main.js \n var app=new Vue({el:"#app",data:{user:"Chris",temp:95}});module.exports=app;`) },
+              { vModel: js_beautify(`//main.spec.js \n const app=require("./main");describe("Load app from main.js",()=>{it("has a created hook",()=>{expect(typeof app).toBe("object");});it("sets the correct default data",()=>{expect(typeof app).toBe("object");expect(2).toEqual(2);expect(app.user).toEqual("Chris");});});`) },
+              { vModel: js_beautify(`{\n"scripts":{ "test":"jest" }\n}`) }
+            ], status: " 🔴"
+          },
+          {
+            name: "question 4", layoutItems: [
+              { vModel: js_beautify(`Edit your code to pass the tests! All the best!`) },
+              { vModel: js_beautify(`//main.js \n var app=new Vue({el:"#app",data:{user:"Chris",temp:95}});module.exports=app;`) },
+              { vModel: js_beautify(`//main.spec.js \n const app=require("./main");describe("Load app from main.js",()=>{it("has a created hook",()=>{expect(typeof app).toBe("object");});it("sets the correct default data",()=>{expect(typeof app).toBe("object");expect(2).toEqual(2);expect(app.user).toEqual("Chris");});});`) },
+              { vModel: js_beautify(`{\n"scripts":{ "test":"jest" }\n}`) }
+            ], status: " 🔴"
+          },
+          {
+            name: "question 5", layoutItems: [
+              { vModel: js_beautify(`Edit your code to pass the tests! All the best!`) },
+              { vModel: js_beautify(`//main.js \n var app=new Vue({el:"#app",data:{user:"Chris",temp:95}});module.exports=app;`) },
+              { vModel: js_beautify(`//main.spec.js \n const app=require("./main");describe("Load app from main.js",()=>{it("has a created hook",()=>{expect(typeof app).toBe("object");});it("sets the correct default data",()=>{expect(typeof app).toBe("object");expect(2).toEqual(2);expect(app.user).toEqual("Chris");});});`) },
+              { vModel: js_beautify(`{\n"scripts":{ "test":"jest" }\n}`) }
+            ], status: " 🔴"
           }
-          else {
-          this.questions.find(item => item.name === questionName).status = " 🔴";
-          }
+        ]
+      }
+    },
+    methods: {
+      toggleQuestionStatus(response) {
+        const { data, questionName } = response
+        if (data.isComplete) {
+          this.questions.find(item => item.name === questionName).status = " ✔️";
+
         }
-      }       
-    });
-  </script>
-  <style lang="scss" scoped>
-    textarea {
-      font-size: 1rem !important;
-      height: 100%;
+        else {
+          this.questions.find(item => item.name === questionName).status = " 🔴";
+        }
+      }
     }
-    .md-card-header {
-      padding-top: 0px;
-    }
-    .md-tabs {
-      width: 100%;
-    }
-    .md-tab {
-      min-height: 600px;
-    }
-    .md-content {
-      min-height: 200px !important;
-    }
-    .md-card {
-      overflow: hidden;
-    }
-    .md-field {
-      padding-top: 0px;
-    }
-    .button {
-      display: inline-block;
-      border-radius: 4px;
-      background-color: #0099ff;
-      border: none;
-      color: #ffffff;
-      text-align: center;
-      font-size: 20px;
-      padding: 10;
-      transition: all 0.5s;
-      cursor: pointer;
-      margin-top: 5px;
-    }
-    #submit span {
-      cursor: pointer;
-      display: inline-block;
-      position: relative;
-      transition: 0.5s;
-    }
-    #submit span:after {
-      content: ">";
-      position: absolute;
-      opacity: 0;
-      top: 0;
-      right: -20px;
-      transition: 0.5s;
-    }
-    #submit:hover span {
-      padding-right: 25px;
-    }
-    #submit:hover span:after {
-      opacity: 1;
-      right: 0;
-    }
-    .hidden {
-      display: none;
-    }
-    .output-tab {
-      min-height: 150px !important;
-      max-height: 150px !important;
-      overflow: scroll;
-    }
-    h1{
-      margin-top: 1rem;
-      padding:20px;
-      text-align: center
-    }  
-    .CodeMirror {
-      height: 150px;
-    }
-    .CodeMirror-overlayscroll-vertical {
-      display: block !important;
-    }
-  </style>
+  });
+</script>
+<style lang="scss" scoped>
+  textarea {
+    font-size: 1rem !important;
+    height: 100%;
+  }
+
+  .md-card-header {
+    padding-top: 0px;
+  }
+
+  .md-tabs {
+    width: 100%;
+  }
+
+  .md-tab {
+    min-height: 600px;
+  }
+
+  .md-content {
+    min-height: 200px !important;
+  }
+
+  .md-card {
+    overflow: hidden;
+  }
+
+  .md-field {
+    padding-top: 0px;
+  }
+
+  .button {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #0099ff;
+    border: none;
+    color: #ffffff;
+    text-align: center;
+    font-size: 20px;
+    padding: 10;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin-top: 5px;
+  }
+
+  #submit span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  #submit span:after {
+    content: ">";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  #submit:hover span {
+    padding-right: 25px;
+  }
+
+  #submit:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .output-tab {
+    min-height: 150px !important;
+    max-height: 150px !important;
+    overflow: scroll;
+  }
+
+  h1 {
+    margin-top: 1rem;
+    padding: 20px;
+    text-align: center
+  }
+
+  .CodeMirror {
+    height: 150px;
+  }
+
+  .CodeMirror-overlayscroll-vertical {
+    display: block !important;
+  }
+</style>
+
 </html>
