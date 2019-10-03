@@ -1,10 +1,10 @@
-const getContents = require("./getContents");
+const fs = require("fs");
 const testRunner = require("./testRunner");
 
 exports.handler = async event => {
   process.env.PATH =
     process.env.PATH + ":" + process.env.LAMBDA_TASK_ROOT + "/bin";
-  const indexPage = getContents();
+  const indexPage = fs.readFileSync('./index.html', 'utf8');
 
   if (event.httpMethod === "GET") {
     return {
@@ -23,7 +23,7 @@ exports.handler = async event => {
     const hiddenCode = parsedBodyContent["hidden"]["0"];
 
     let allFeedback = testRunner(shownCode, editedCode, hiddenCode);
-    
+
     return {
       statusCode: 200,
       headers: {
