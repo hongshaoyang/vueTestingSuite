@@ -60,4 +60,5 @@ Resources:
     Type: AWS::Serverless::Function
 Globals:
   Api:
-    Cors: "'*'"
+    Cors:
+      AllowOrigin: "'*'"
