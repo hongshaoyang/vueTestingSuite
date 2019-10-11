@@ -6,13 +6,13 @@ exports.handler = async event => {
     process.env.PATH + ":" + process.env.LAMBDA_TASK_ROOT + "/bin";
   const indexPage = fs.readFileSync('./index.html', 'utf8');
 
+  // redirect via 301 Moved Permanently
   if (event.httpMethod === "GET") {
     return {
-      statusCode: 200,
+      statusCode: 301,
       headers: {
-        "Content-Type": "text/html"
-      },
-      body: indexPage
+        "Location": "https://justussoh.github.io/3103-P2J"
+      }
     };
   }
 
