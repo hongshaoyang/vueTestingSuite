@@ -58,3 +58,6 @@ Resources:
       Timeout:
         Ref: "LambdaTimeout"
     Type: AWS::Serverless::Function
+Globals:
+  Api:
+    Cors: "*"
