@@ -22,7 +22,12 @@ exports.handler = async event => {
     const editedCode = parsedBodyContent["editable"]["0"];
     const hiddenCode = parsedBodyContent["hidden"]["0"];
 
-    let allFeedback = testRunner(shownCode, editedCode, hiddenCode);
+    let allFeedback;
+    try {
+      allFeedback = testRunner(shownCode, editedCode, hiddenCode);
+    } catch (error) {
+      allFeedback = null;
+    }
 
     return {
       statusCode: 200,
