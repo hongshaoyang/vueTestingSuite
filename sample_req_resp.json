@@ -1,0 +1,22 @@
+// request
+{
+    "userToken": "ABCDE",
+    "shown": {
+        "0": "//main.spec.js \nconst app = require(\"./main\");\ndescribe(\"Load app from main.js\", () => {\n    it(\"has a created hook\", () => {\n        expect(typeof app).toBe(\"object\");\n    });\n    it(\"sets the correct default data\", () => {\n        expect(typeof app).toBe(\"object\");\n        expect(2).toEqual(2);\n        expect(app.user).toEqual(\"Chris\");\n    });\n});"
+    },
+    "editable": {
+        "0": "//main.js \nvar app = new Vue({\n    el: \"#app\",\n    data: {\n        user: \"Chris\",\n        temp: 95\n    }\n});\nmodule.exports = app;"
+    },
+    "hidden": {
+        "0": "{\n    \"scripts\": {\n        \"test\": \"jest\"\n    }\n}"
+    }
+}
+// response
+{
+    "isComplete": true,
+    "jsonFeedback": {
+        "code": "K8w6p"
+    },
+    "htmlFeedback": "<div>Hello there!</div>",
+    "textFeedback": "Hello there!"
+}
