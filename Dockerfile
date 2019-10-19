@@ -10,6 +10,8 @@ RUN apk add --no-cache --virtual .build-deps gcc musl-dev \
 
 RUN pip3 install awscli 
 RUN apk add zip
+RUN apk add --update nodejs npm
+RUN apk add --update npm 
 
 ADD entrypoint.sh /entrypoint.sh
 
