@@ -18,15 +18,22 @@ exports.handler = async event => {
 
   if (event.httpMethod === "POST") {
     const parsedBodyContent = JSON.parse(event.body);
+    console.log("parsedBodyContent:", parsedBodyContent);
     const shownCode = parsedBodyContent["shown"]["0"];
     const editedCode = parsedBodyContent["editable"]["0"];
     const hiddenCode = parsedBodyContent["hidden"]["0"];
 
-    let allFeedback;
+    let allFeedback, body;
     try {
       allFeedback = testRunner(shownCode, editedCode, hiddenCode);
+      body = JSON.stringify({
+        isComplete: allFeedback["isCorrect"],
+        jsonFeedback: allFeedback["jsonFeedback"],
+        htmlFeedback: allFeedback["htmlFeedback"],
+        textFeedback: allFeedback["textFeedback"]
+      })
     } catch (error) {
-      allFeedback = null;
+      body = undefined;
     }
 
     return {
@@ -35,12 +42,7 @@ exports.handler = async event => {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*"
       },
-      body: JSON.stringify({
-        isComplete: allFeedback["isCorrect"],
-        jsonFeedback: allFeedback["jsonFeedback"],
-        htmlFeedback: allFeedback["htmlFeedback"],
-        textFeedback: allFeedback["textFeedback"]
-      })
+      body: body,
     };
   }
 };
