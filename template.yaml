@@ -58,6 +58,10 @@ Resources:
       Timeout:
         Ref: "LambdaTimeout"
     Type: AWS::Serverless::Function
+# NOTE: HTTP spec requires the value of Allow properties to be a quoted string.
+# So don't forget the additional quotes in the value. ie. "'www.example.com'" is correct whereas "www.example.com" is wrong
 Globals:
   Api:
-    Cors: "'*'"
+    Cors:
+      AllowOrigin: "'*'"
+      AllowHeaders: "'Content-Type'"
