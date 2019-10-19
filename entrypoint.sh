@@ -7,12 +7,30 @@ export AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
 export OVERLAY_S3URL="s3://${BUCKET_NAME}/${LAMBDA_FUNC_NAME}/lambda-deploy.tgz"
 
 # Zip up and upload your project in the src/ folder to the AWS S3 cloud
-tar -czvf lambda-deploy-overlay.tgz ./
+tar -czf lambda-deploy-overlay.tgz ./
 aws s3 cp --acl public-read lambda-deploy-overlay.tgz "$OVERLAY_S3URL"
 
 # zip src/ folder
 rm -f lambda-deploy.zip
-cd src; zip -r ../lambda-deploy.zip *
+cd src
+
+echo 
+echo "***************************"
+echo "*****NPM INSTALL***********"
+echo "***************************"
+
+# npm install node modules
+if npm install
+then 
+    echo "$(tput setaf 2)npm successfully installed$(tput sgr 0)"
+else
+    echo "$(tput setaf 2)**********ERROR***********$(tput sgr 0)"
+fi
+
+# zip project contents
+zip -r ../lambda-deploy.zip *
+
+# Move back to main project
 cd ..
 
 # Validate your template structure.
