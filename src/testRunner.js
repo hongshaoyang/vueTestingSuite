@@ -5,21 +5,8 @@ const fs = require("fs");
 const systemSync = require("./executeShellCommand");
 
 function updatePackageConfig(configContents) {
-  let packageConfigContents = JSON.parse(
-    systemSync("cat /tmp/example/package.json")
-  );
-  if (configContents["jest"]) {
-    //contains jest configurations
-    packageConfigContents["jest"] = configContents["jest"];
-  }
-  if (configContents["scripts"]["test"]) {
-    if (configContents["scripts"]["test"].trim() === "jest") {
-      return "npm test";
-    } else if (configContents["scripts"]["test"].includes("coverage")) {
-      return "npm run coverage";
-    } else {
-      return "npm test";
-    }
+  if (configContents["scripts"]["test"] && (configContents["scripts"]["test"].includes("coverage"))) {
+    return "npm run coverage";
   } else {
     return "npm test";
   }
@@ -46,15 +33,15 @@ function testRunner(shownCode, editedCode, hiddenCode) {
                       const Vue = require("./node_modules/vue");\n 
                       Vue.config.silent = true \n` + editedCode;
   // writeFileSync function with filename, content and callback function
-  fs.writeFileSync("/tmp/example/main.js", editedCodeNew, function(err) {
+  fs.writeFileSync("/tmp/example/main.js", editedCodeNew, function (err) {
     if (err) throw err;
-    console.log("File is created successfully.");
+    console.log("main.js created successfully.");
   });
 
   //let shownCodeNew = `const fetch = require("./node_modules/node-fetch");\n` + shownCode;
-  fs.writeFileSync("/tmp/example/main.spec.js", shownCode, function(err) {
+  fs.writeFileSync("/tmp/example/main.spec.js", shownCode, function (err) {
     if (err) throw err;
-    console.log("File is created successfully.");
+    console.log("main.spec.js created successfully.");
   });
 
   let configContents =
@@ -71,20 +58,15 @@ function testRunner(shownCode, editedCode, hiddenCode) {
 
   switch (toTest) {
     case "npm test":
-      let npmTest = "cd /tmp/example; CI=true npm test";
-      let npmTestResults = systemSync(npmTest);
-
-      let npmTestJSON = "cd /tmp/example; CI=true npm run test-json";
-      let npmTestJSONResults = systemSync(npmTestJSON);
-      let finalnpmTestJSONResults = {};
-
+      let npmTestResults = systemSync("cd /tmp/example; CI=true npm test");
+      let npmTestJSONResults = systemSync("cd /tmp/example; CI=true npm run test-json");
+      let finalnpmTestJSONResults;
       if (typeof npmTestJSONResults === "string") {
         let lines = npmTestJSONResults.split("\n");
         // remove three lines, starting at the first position
         lines.splice(0, 3);
         // join the array back into a single string
-        let newtext = lines.join("\n");
-        finalnpmTestJSONResults = JSON.parse(newtext);
+        finalnpmTestJSONResults = JSON.parse(lines.join("\n"));
       } else {
         finalnpmTestJSONResults = npmTestJSONResults;
       }
@@ -124,8 +106,7 @@ function testRunner(shownCode, editedCode, hiddenCode) {
         // remove three lines, starting at the first position
         lines.splice(0, 3);
         // join the array back into a single string
-        let newtext = lines.join("\n");
-        finalnpmCoverageJSONResults = JSON.parse(newtext);
+        finalnpmCoverageJSONResults = JSON.parse(lines.join("\n"));
       } else {
         finalnpmCoverageJSONResults = npmCoverageJSONResults;
       }
