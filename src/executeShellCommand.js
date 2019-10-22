@@ -1,7 +1,10 @@
 function systemSync(cmd) {
   try {
+    console.log("running: ", cmd)
     var child_process = require("child_process");
-    return child_process.execSync(cmd, { encoding: "utf-8" }).toString();
+    const output = child_process.execSync(cmd, { encoding: "utf-8" }).toString();
+    console.log("ran:", cmd)
+    return output
   } catch (error) {
     return error.output[1];
     //error.status;  // Holds the error status code
