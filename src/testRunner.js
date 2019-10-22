@@ -75,14 +75,9 @@ function testRunner(shownCode, editedCode, hiddenCode) {
         finalnpmTestJSONResults.numTotalTestSuites +
         "\nTest suits Passed = " +
         finalnpmTestJSONResults.numPassedTestSuites;
-      let htmlResult =
-        "<h4>npm test results :- </h4>" +
-        (typeof npmTestResults === "string"
-          ? npmTestResults
-          : JSON.stringify(npmTestResults, null, 2));
       allFeedback = {
         isCorrect: finalnpmTestJSONResults.success,
-        htmlFeedback: htmlResult,
+        htmlFeedback: (typeof npmTestResults === "string" ? npmTestResults : JSON.stringify(npmTestResults, null, 2)),
         jsonFeedback: finalnpmTestJSONResults,
         textFeedback: textResults
       };
