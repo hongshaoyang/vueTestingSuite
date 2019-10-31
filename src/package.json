@@ -4,8 +4,8 @@
   "description": "",
   "main": "example.js",
   "scripts": {
-    "test": "jest --colors 2>&1 | aha",
-    "test-json": "jest --colors --json",
+    "test": "jest -i --colors 2>&1 | aha",
+    "test-json": "jest -i --colors --json",
     "coverage": "jest --coverage --colors |& aha > /tmp/example/coverage.txt ",
     "jsonCoverage": "jest --coverage --json "
   },
