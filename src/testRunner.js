@@ -29,9 +29,7 @@ function testRunner(shownCode, editedCode, hiddenCode) {
   //Setup the lambda environment
   initialSetup();
 
-  let editedCodeNew = `const fetch = require("./node_modules/node-fetch");\n
-                      const Vue = require("./node_modules/vue");\n 
-                      Vue.config.silent = true \n` + editedCode;
+  let editedCodeNew = `const fetch = require("./node_modules/node-fetch");\n` + editedCode;
   // writeFileSync function with filename, content and callback function
   fs.writeFileSync("/tmp/example/main.js", editedCodeNew, function (err) {
     if (err) throw err;
