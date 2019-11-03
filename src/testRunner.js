@@ -4,14 +4,6 @@
 const fs = require("fs");
 const systemSync = require("./executeShellCommand");
 
-function updatePackageConfig(configContents) {
-  if (configContents["scripts"]["test"] && (configContents["scripts"]["test"].includes("coverage"))) {
-    return "npm run coverage";
-  } else {
-    return "npm test";
-  }
-}
-
 function initialSetup() {
   systemSync("mkdir -p /tmp/example/node_modules");
   //Copy over related project files
@@ -42,10 +34,7 @@ function testRunner(shownCode, editedCode, hiddenCode) {
     console.log("main.spec.js created successfully.");
   });
 
-  let configContents =
-    typeof hiddenCode === "string" ? JSON.parse(hiddenCode) : hiddenCode;
-
-  let toTest = updatePackageConfig(configContents);
+  let toTest = "npm test";
 
   let allFeedback = {
     isCorrect: false,
