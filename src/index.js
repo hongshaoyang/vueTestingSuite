@@ -17,8 +17,8 @@ exports.handler = async event => {
   }
 
   if (event.httpMethod === "POST") {
+    console.log("event.body", event.body)
     const parsedBodyContent = JSON.parse(event.body);
-    console.log("parsedBodyContent:", parsedBodyContent);
     const shownCode = parsedBodyContent["shown"]["0"];
     const editedCode = parsedBodyContent["editable"]["0"];
     const hiddenCode = parsedBodyContent["hidden"]["0"];
